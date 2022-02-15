@@ -4,8 +4,13 @@ export class Todo extends Component {
   render() {
     return (
       <div>
-        <button>Edit</button>
-        <button>X</button>
+        <button>
+          <i className='fas fa-pen' />
+          {/* Edit */}
+        </button>
+        <button>
+          <i className='fas fa-trash' />
+        </button>
         <li>{this.props.task}</li>
       </div>
     );
