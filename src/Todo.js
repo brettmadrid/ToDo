@@ -5,7 +5,7 @@ export class Todo extends Component {
     return (
       <div>
         <button>Edit</button>
-        <button>Delete</button>
+        <button>X</button>
         <li>{this.props.task}</li>
       </div>
     );

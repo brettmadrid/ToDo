@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Todo from './Todo';
 
 export class TodoList extends Component {
   constructor(props) {
@@ -20,15 +21,12 @@ export class TodoList extends Component {
     };
   }
   render() {
+    const todos = this.state.todos.map(t => <Todo task={t.task} />);
     return (
       <div>
         <h1>Todo List</h1>
         {/* <TodoForm /> */}
-        <ul>
-          {this.state.todos.map(t => (
-            <li>{t.task}</li>
-          ))}
-        </ul>
+        <ul>{todos}</ul>
       </div>
     );
   }
