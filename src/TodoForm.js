@@ -9,19 +9,19 @@ export class TodoForm extends Component {
     };
   }
 
-  addTaskHandler = e => {
+  handleSubmit = e => {
     e.preventDefault();
     this.props.addTask(this.state);
     this.setState({ task: '' });
   };
 
-  inputHandler = e => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     return (
-      <form onSubmit={this.addTaskHandler}>
+      <form onSubmit={this.handleSubmit}>
         <label htmlFor='task'>Task </label>
         <input
           id='task'
@@ -29,7 +29,7 @@ export class TodoForm extends Component {
           name='task'
           value={this.state.task}
           placeholder='...'
-          onChange={this.inputHandler}
+          onChange={this.handleChange}
         />
         <button>Add Task</button>
       </form>

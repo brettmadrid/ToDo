@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Todo.css';
 
 export class Todo extends Component {
   constructor(props) {
@@ -28,6 +29,10 @@ export class Todo extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  toggleCompleted = e => {
+    this.props.toggleCompleted(this.props.id);
+  };
+
   render() {
     let result = this.state.isEditing ? (
       <div>
@@ -51,7 +56,11 @@ export class Todo extends Component {
         <button onClick={this.handleRemove}>
           <i className='fas fa-trash' />
         </button>
-        <li>{this.props.task}</li>
+        <li
+          className={this.props.completed && 'completed'}
+          onClick={this.toggleCompleted}>
+          {this.props.task}
+        </li>
       </div>
     );
     return result;
