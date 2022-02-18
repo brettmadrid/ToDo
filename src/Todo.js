@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { EditTodoForm } from './EditTodoForm';
 
 export class Todo extends Component {
   constructor(props) {
@@ -7,26 +6,49 @@ export class Todo extends Component {
 
     this.state = {
       isEditing: false,
+      task: this.props.task,
     };
   }
 
-  deleteHandler = e => {
+  handleUpdate = e => {
+    e.preventDefault();
+    this.props.updateTask(this.props.id, this.state.task);
+    this.setState({ isEditing: false });
+  };
+
+  handleRemove = e => {
     this.props.deleteTask(this.props.id);
   };
 
-  editHandler = e => {
+  toggleForm = e => {
     this.setState({ isEditing: !this.state.isEditing });
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     let result = this.state.isEditing ? (
-      <EditTodoForm task={this.props.task} />
+      <div>
+        <form onSubmit={this.handleUpdate}>
+          <input
+            type='text'
+            placeholder={this.props.task}
+            name='task'
+            value={this.state.task}
+            id={this.props.id}
+            onChange={this.handleChange}
+          />
+          <button>Save</button>
+        </form>
+      </div>
     ) : (
       <div>
-        <button onClick={this.editHandler}>
+        <button onClick={this.toggleForm}>
           <i className='fas fa-pen' />
         </button>
-        <button onClick={this.deleteHandler}>
+        <button onClick={this.handleRemove}>
           <i className='fas fa-trash' />
         </button>
         <li>{this.props.task}</li>
